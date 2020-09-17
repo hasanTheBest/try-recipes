@@ -13,9 +13,11 @@ import NotFound404 from "./NotFound404";
 
 // Reshaped
 import Home from "./Containers/Home";
+import Categories from "./Containers/Categories";
+import RecipeLookup from "./Components/Common/RecipeLookup";
+import Ingredients from "./Containers/Ingredients";
 // import About from "./Containers/About";
 // import Areas from "./Containers/Areas";
-// import Ingredients from "./Containers/Ingredients";
 // import Categories from "./Containers/Categories";
 
 const styles = makeStyles((theme) => ({
@@ -196,14 +198,20 @@ export default function App() {
             <Route path="/" exact>
               <Home />
             </Route>
+            <Route path="/recipe/:recipeId" exact>
+              <RecipeLookup />
+            </Route>
+            <Route path="/categories" exact>
+              <Categories />
+            </Route>
+            <Route path="/ingredients" exact>
+              <Ingredients />
+            </Route>
             {/* <Route path="/about">
               <About />
             </Route>
             <Route path="/areas">
               <Areas />
-            </Route>
-            <Route path="/categories">
-              <Categories />
             </Route>
             <Route path="/ingredients">
               <Ingredients />

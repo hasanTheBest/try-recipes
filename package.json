@@ -36,6 +36,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "autosuggest-highlight": "^3.1.1",
+    "axios": "^0.20.0",
     "material-ui-image": "^3.2.3",
     "material-ui-popup-state": "^1.6.1",
     "react-router-dom": "^5.2.0"

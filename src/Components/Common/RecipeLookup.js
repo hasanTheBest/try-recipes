@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Card,
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RecipeLookup = ({ random }) => {
   const classes = useStyles();
+  const { recipeId } = useParams();
 
   return (
     <div className="recipe-lookup">

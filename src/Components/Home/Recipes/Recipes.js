@@ -3,7 +3,7 @@ import React from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
 // Components
-import RecipeItem from "./RecipeItem";
+import RecipeItem from "../../Common/RecipeItem";
 import NotFound404 from "../../../NotFound404";
 
 // Data
@@ -19,7 +19,9 @@ const Recipes = () => {
       <Container maxWidth="xl">
         <Grid container spacing={3} justify="center">
           {Boolean(recipes) ? (
-            recipes.meals.map((recipe) => <RecipeItem recipe={recipe} />)
+            recipes.meals.map((recipe) => (
+              <RecipeItem item={recipe} name="Meal" />
+            ))
           ) : (
             <NotFound404 />
           )}
