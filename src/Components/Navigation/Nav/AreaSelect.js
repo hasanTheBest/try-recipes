@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
     visibility: "hidden",
   },
+  menuItemLink: {
+    color: "inherit",
+    "&:hover": {
+      textDecoration: "none",
+    },
+  },
 }));
 
 const AreaSelect = () => {
@@ -51,14 +57,17 @@ const AreaSelect = () => {
           onClose={handleCloseSelect}
           onOpen={handleOpenSelect}
           value=""
-          // onChange={(e) => onAreaFilter(e, 0, history)}
         >
           <MenuItem value="">
             <em>Area</em>
           </MenuItem>
           {areas.meals.map(({ strArea }, i) => (
             <MenuItem key={String(i)} value={strArea}>
-              <Link to={`/area/${strArea}`} component={RouterLink}>
+              <Link
+                to={`/area/${strArea}`}
+                component={RouterLink}
+                className={classes.menuItemLink}
+              >
                 {strArea}
               </Link>
             </MenuItem>

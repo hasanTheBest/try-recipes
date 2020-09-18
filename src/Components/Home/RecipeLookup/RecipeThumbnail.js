@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import {
-  Button,
-  Card,
-  CardMedia,
-  IconButton,
-  makeStyles,
-} from "@material-ui/core";
-import { Fullscreen, Visibility, YouTube } from "@material-ui/icons";
+import React from "react";
+import { Card, CardMedia, makeStyles } from "@material-ui/core";
 
 // Components
-import DialogRecipe from "../../Common/Dialog/DialogRecipe";
+import ImageFullscreen from "./RecipeThumbnail/ImageFullscreen";
+import YoutubeFullscreen from "./RecipeThumbnail/YoutubeFullscreen";
 
 const useStyles = makeStyles((theme) => ({
   mealThumb: {
@@ -33,15 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 const RecipeThumbnail = ({ meal: { strMeal, strMealThumb, strYoutube } }) => {
   const classes = useStyles();
-  const [openYT, setOpenYT] = useState(false);
-  const [openFullscreen, setFullscreen] = useState(false);
-
-  // Open
-  const handleOpenFullscreen = () => setFullscreen(true);
-  const handleOpenYT = () => setOpenYT(true);
-  // Close
-  const handleCloseYT = () => setOpenYT(false);
-  const handleCloseFullscreen = () => setFullscreen(false);
 
   return (
     <>
@@ -54,43 +38,10 @@ const RecipeThumbnail = ({ meal: { strMeal, strMealThumb, strYoutube } }) => {
         />
         {/* YouTube and Full screen Button */}
         <div className={classes.fullscreenIconBar}>
-          <Button
-            variant="outlined"
-            startIcon={<Visibility />}
-            color="secondary"
-            size="small"
-            component={RouterLink}
-            endIcon={<YouTube />}
-            onClick={handleOpenYT}
-          >
-            on
-          </Button>
-          <IconButton aria-label="Full screen" onClick={handleOpenFullscreen}>
-            <Fullscreen />
-          </IconButton>
+          <YoutubeFullscreen title={strMeal} thumb={strYoutube} />
+          <ImageFullscreen title={strMeal} thumb={strMealThumb} />
         </div>
       </Card>
-
-      {/* Dialog */}
-      {openFullscreen ? (
-        <DialogRecipe
-          open={openFullscreen}
-          handleClose={handleCloseFullscreen}
-          strMeal={strMeal}
-          strMealThumb={strMealThumb}
-          strYoutube={strYoutube}
-          name="image"
-        />
-      ) : (
-        <DialogRecipe
-          open={openYT}
-          handleClose={handleCloseYT}
-          strMeal={strMeal}
-          strMealThumb={strMealThumb}
-          strYoutube={strYoutube}
-          name="youtube"
-        />
-      )}
     </>
   );
 };

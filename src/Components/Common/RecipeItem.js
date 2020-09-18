@@ -11,8 +11,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
-import { Pageview, StarRate, Wallpaper } from "@material-ui/icons";
-import React from "react";
+import { Pageview, Wallpaper } from "@material-ui/icons";
+import React, { useState } from "react";
+import CustomDialog from "./Dialog/CustomDialog";
+import CustomDialogContent from "./Dialog/CustomDialogContent";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -58,7 +60,16 @@ const useStyles = makeStyles((theme) => ({
 
 const RecipeItem = ({ item, name }) => {
   const classes = useStyles();
-  const [id, title] = [`id${name}`, `str${name}`];
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleOpenDialog = () => setOpenDialog(true);
+  const handleCloseDialog = () => setOpenDialog(false);
+
+  const [id, title, description] = [
+    `id${name}`,
+    `str${name}`,
+    `str${name === "ingredient" ? "" : name}Description`,
+  ];
   const thumb =
     "Ingredient" === name
       ? `https://www.themealdb.com/images/ingredients/${item[title]}-Small.png`
@@ -70,9 +81,6 @@ const RecipeItem = ({ item, name }) => {
         {item["strCategory"] && item["strArea"] && (
           <div className={classes.categoryAreaBar}>
             <Chip
-              // onClick={(e) =>
-              //   categoryFilter(e, false, recipe.strCategory, history)
-              // }
               component={RouterLink}
               to={`/category/${item["strCategory"]}`}
               size="small"
@@ -80,7 +88,6 @@ const RecipeItem = ({ item, name }) => {
               color="secondary"
             />
             <Chip
-              // onClick={(e) => onAreaFilter(e, recipe.strArea, history)}
               component={RouterLink}
               to={`/area/${item["strArea"]}`}
               value={item["strArea"]}
@@ -97,20 +104,34 @@ const RecipeItem = ({ item, name }) => {
           title={item[title]}
         />
         {"Meal" !== name ? (
-          <CardActions disableSpacing className={classes.cardActions}>
-            <IconButton
-              aria-label={`Visit ${item[title]}`}
-              // onClick={() => clickCategory("", item[strCategory], history)}
-            >
-              <Typography noWrap>{item[title]}</Typography>
-            </IconButton>
-            <IconButton
-              aria-label="show more"
-              // onClick={() => handleDialogOpen(idCategory)}
-            >
-              <Wallpaper />
-            </IconButton>
-          </CardActions>
+          <>
+            <CardActions disableSpacing className={classes.cardActions}>
+              <IconButton
+                aria-label={`Visit ${item[title]}`}
+                to={`/category/${item[title]}`}
+                component={RouterLink}
+              >
+                <Typography noWrap>{item[title]}</Typography>
+              </IconButton>
+              <IconButton aria-label="show more" onClick={handleOpenDialog}>
+                <Wallpaper />
+              </IconButton>
+            </CardActions>
+
+            {openDialog && (
+              <CustomDialog
+                open={openDialog}
+                handleClose={handleCloseDialog}
+                title={item[title]}
+              >
+                <CustomDialogContent
+                  title={item[title]}
+                  thumbnail={item[thumb]}
+                  description={item[description]}
+                />
+              </CustomDialog>
+            )}
+          </>
         ) : (
           <CardContent className={classes.strMeal}>
             <Button
@@ -121,7 +142,6 @@ const RecipeItem = ({ item, name }) => {
               component={RouterLink}
               to={`/recipe/${item[id]}`}
               title={item[title]}
-              // onClick={() => history.push(`/meal/${recipe.idMeal}`)}
             >
               <Typography component="span" noWrap>
                 {item[title]}
