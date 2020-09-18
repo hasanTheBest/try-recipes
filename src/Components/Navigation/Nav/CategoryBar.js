@@ -1,10 +1,9 @@
 import React from "react";
 // Router
-import { useHistory } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 // Material UI Components
 import { makeStyles, AppBar, Tabs, Tab } from "@material-ui/core";
-// data
-import categories from "../data/category_list.json";
+import categories from "../../../data/category_list.json";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CategoryBar({ categoryFilter, tabs }) {
+export default function CategoryBar() {
   const classes = useStyles();
-  let history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -28,7 +26,6 @@ export default function CategoryBar({ categoryFilter, tabs }) {
           variant="scrollable"
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
-          // onChange={(e, value) => categoryFilter(value, "", history)}
         >
           <Tab style={{ display: "none" }} label="placeholder" value="" />
           {categories.meals.map(({ strCategory }, i) => (
@@ -37,6 +34,8 @@ export default function CategoryBar({ categoryFilter, tabs }) {
               index={i}
               label={strCategory}
               value={strCategory}
+              component={RouterLink}
+              to={`/category/${strCategory}`}
             />
           ))}
         </Tabs>

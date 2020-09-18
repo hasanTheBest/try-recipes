@@ -12,9 +12,10 @@ import {
 import NotFound404 from "./NotFound404";
 
 // Reshaped
+import Navigation from "./Components/Navigation/Navigation";
 import Home from "./Containers/Home";
-import Categories from "./Containers/Categories";
 import RecipeLookup from "./Components/Common/RecipeLookup";
+import Categories from "./Containers/Categories";
 import Ingredients from "./Containers/Ingredients";
 // import About from "./Containers/About";
 // import Areas from "./Containers/Areas";
@@ -62,7 +63,7 @@ export default function App() {
 
   // Meals
   useEffect(() => {
-    fetchMeals();
+    // fetchMeals();
   }, [recipes.url]);
 
   // Fetch List
@@ -194,6 +195,9 @@ export default function App() {
       <CssBaseline />
       <ThemeProvider theme={themeDark}>
         <BrowserRouter>
+          <Route path="/">
+            <Navigation />
+          </Route>
           <Switch>
             <Route path="/" exact>
               <Home />
@@ -207,15 +211,9 @@ export default function App() {
             <Route path="/ingredients" exact>
               <Ingredients />
             </Route>
-            {/* <Route path="/about">
-              <About />
+            <Route>
+              <NotFound404 />
             </Route>
-            <Route path="/areas">
-              <Areas />
-            </Route>
-            <Route path="/ingredients">
-              <Ingredients />
-            </Route> */}
           </Switch>
         </BrowserRouter>
       </ThemeProvider>

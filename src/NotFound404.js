@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { makeStyles, Box, Typography, Button, Paper } from "@material-ui/core";
 import spacing from "@material-ui/system";
 import { Home } from "@material-ui/icons";
@@ -25,7 +26,7 @@ export default function NotFound404({ closeBackdrop, error }) {
             size="large"
             endIcon={<Home />}
             to="/"
-            component={Link}
+            component={RouterLink}
           >
             Return to
           </Button>
