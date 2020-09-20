@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { InputBase, makeStyles, fade } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -46,21 +47,34 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchField = () => {
   const classes = useStyles();
+  let history = useHistory();
+
+  const [value, setValue] = useState("");
+
+  const handleSearchChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    history.push(`/search/${value}`);
+    setValue("");
+  };
 
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
         <Search />
       </div>
-      <form /* onSubmit={(e) => handleSearchSubmit(e, "", history)} */>
+      <form onSubmit={(e) => handleSearchSubmit(e)}>
         <InputBase
-          // onChange={handleSearchChange}
+          onChange={(e) => handleSearchChange(e)}
           placeholder="Search…"
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,
           }}
           inputProps={{ "aria-label": "search" }}
+          value={value}
         />
       </form>
     </div>

@@ -18,8 +18,9 @@ import IngredientMeasureTable from "../Home/RecipeLookup/IngredientMeasureTable"
 import RecipeIngredientList from "../Home/RecipeLookup/RecipeIngredientList";
 import RecipeMetaBar from "../Home/RecipeLookup/RecipeMetaBar";
 import RecipeThumbnail from "../Home/RecipeLookup/RecipeThumbnail";
+import useSuspenseItems from "../../Hook/useSuspenseItems";
 
-const meal = singleRecipe.meals[0];
+// const meal = singleRecipe.meals[0];
 
 const useStyles = makeStyles((theme) => ({
   recipeInstructions: {
@@ -29,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 const RecipeLookup = ({ random }) => {
   const classes = useStyles();
-  const { recipeId } = useParams();
+  const { id } = useParams();
+  const meal = useSuspenseItems(random ? "random" : "lookup", "i", id)[0];
 
   return (
     <div className="recipe-lookup">

@@ -1,24 +1,8 @@
 import React from "react";
-import { Container, Grid } from "@material-ui/core";
+import SearchItems from "../Components/Common/SearchItems";
 
-import RecipeItem from "../Components/Common/RecipeItem";
-import NotFound404 from "../NotFound404";
-import ingredients from "../data/ingredient_list.json";
-
-const Categories = () => {
-  return (
-    <Container maxWidth="xl">
-      <Grid container spacing={3} justify="center">
-        {Boolean(ingredients.meals) ? (
-          ingredients.meals.map((ingredient) => (
-            <RecipeItem item={ingredient} name="Ingredient" />
-          ))
-        ) : (
-          <NotFound404 />
-        )}
-      </Grid>
-    </Container>
-  );
+const Ingredients = () => {
+  return <SearchItems term="list" filter="i" id="list" name="Ingredient" />;
 };
 
-export default Categories;
+export default Ingredients;

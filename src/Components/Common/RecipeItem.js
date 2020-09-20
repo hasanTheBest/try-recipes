@@ -1,3 +1,5 @@
+import React, { forwardRef, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Button,
   Card,
@@ -5,14 +7,12 @@ import {
   CardContent,
   CardMedia,
   Chip,
-  Grid,
   IconButton,
-  makeStyles,
+  Grid,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
 import { Pageview, Wallpaper } from "@material-ui/icons";
-import React, { useState } from "react";
 import CustomDialog from "./Dialog/CustomDialog";
 import CustomDialogContent from "./Dialog/CustomDialogContent";
 
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RecipeItem = ({ item, name }) => {
+const RecipeItem = ({ item, name }, ref) => {
   const classes = useStyles();
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -68,7 +68,7 @@ const RecipeItem = ({ item, name }) => {
   const [id, title, description] = [
     `id${name}`,
     `str${name}`,
-    `str${name === "ingredient" ? "" : name}Description`,
+    `str${name === "Ingredient" ? "" : name}Description`,
   ];
   const thumb =
     "Ingredient" === name
@@ -76,7 +76,7 @@ const RecipeItem = ({ item, name }) => {
       : `str${name}Thumb`;
 
   return (
-    <Grid item xs={6} sm={4} md={3} xl={2}>
+    <Grid item xs={12} sm={6} md={4} lg={3} ref={ref}>
       <Card className={classes.card}>
         {item["strCategory"] && item["strArea"] && (
           <div className={classes.categoryAreaBar}>
@@ -108,7 +108,7 @@ const RecipeItem = ({ item, name }) => {
             <CardActions disableSpacing className={classes.cardActions}>
               <IconButton
                 aria-label={`Visit ${item[title]}`}
-                to={`/category/${item[title]}`}
+                to={`/${name.toLowerCase()}/${item[title]}`}
                 component={RouterLink}
               >
                 <Typography noWrap>{item[title]}</Typography>
@@ -154,4 +154,4 @@ const RecipeItem = ({ item, name }) => {
   );
 };
 
-export default RecipeItem;
+export default forwardRef(RecipeItem);

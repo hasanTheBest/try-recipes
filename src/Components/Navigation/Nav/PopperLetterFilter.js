@@ -1,6 +1,6 @@
 import React from "react";
 // Router
-import { useHistory } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 // Material UI Components
 import {
   makeStyles,
@@ -30,9 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PopperLetterFilter({ handleClickFilterLetter }) {
+export default function PopperLetterFilter() {
   const classes = useStyles();
-  let history = useHistory();
 
   return (
     <PopupState variant="popper" popupId="demo-popup-popper">
@@ -90,7 +89,8 @@ export default function PopperLetterFilter({ handleClickFilterLetter }) {
                       color="default"
                       size="small"
                       className={classes.fab}
-                      onClick={() => handleClickFilterLetter(letter, history)}
+                      to={`/first_letter/${letter}`}
+                      component={RouterLink}
                     >
                       {letter}
                     </Fab>

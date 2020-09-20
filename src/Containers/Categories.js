@@ -1,28 +1,8 @@
 import React from "react";
-import { Container, Grid } from "@material-ui/core";
-
-// import Navigation from "../Components/Home/Navigation/Navigation";
-import RecipeItem from "../Components/Common/RecipeItem";
-import NotFound404 from "../NotFound404";
-import cat from "../data/categories.json";
+import SearchItems from "../Components/Common/SearchItems";
 
 const Categories = () => {
-  return (
-    <>
-      {/* <Navigation /> */}
-      <Container maxWidth="xl">
-        <Grid container spacing={3} justify="center">
-          {Boolean(cat.categories) ? (
-            cat.categories.map((category) => (
-              <RecipeItem item={category} name="Category" />
-            ))
-          ) : (
-            <NotFound404 />
-          )}
-        </Grid>
-      </Container>
-    </>
-  );
+  return <SearchItems term="categories" filter="c" id="beef" name="Category" />;
 };
 
 export default Categories;

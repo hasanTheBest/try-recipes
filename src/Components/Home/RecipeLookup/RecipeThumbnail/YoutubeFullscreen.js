@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const YoutubeFullscreen = ({ title, thumb }) => {
-  console.log("YoutubeFullscreen -> thumb", thumb);
   const classes = useStyles();
 
   const [openYT, setOpenYT] = useState(false);

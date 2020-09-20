@@ -2,9 +2,9 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import SearchItems from "../Components/Common/SearchItems";
 
-const Area = () => {
+const Category = () => {
   const { id } = useParams();
-  return <SearchItems term="filter" filter="a" id={id} />;
+  return <SearchItems term="filter" filter="c" id={id} name="Meal" />;
 };
 
-export default Area;
+export default Category;

@@ -1,14 +1,15 @@
-import React from "react";
-import Recipes from "../Components/Home/Recipes/Recipes";
+import React, { Suspense } from "react";
+import Recipes from "../Components/Home/Recipes";
 import RecipeLookup from "../Components/Common/RecipeLookup";
-// import Navigation from "../Components/Home/Navigation/Navigation";
+import { LinearProgress } from "@material-ui/core";
 
 const Home = () => {
   return (
     <div className="home-container">
-      {/* <Navigation /> */}
-      <Recipes />
-      <RecipeLookup random={true} />
+      <Suspense fallback={<LinearProgress />}>
+        <Recipes />
+        <RecipeLookup random={true} />
+      </Suspense>
     </div>
   );
 };

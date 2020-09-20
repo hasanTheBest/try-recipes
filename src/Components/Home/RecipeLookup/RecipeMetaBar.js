@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { Box, Button, IconButton, Paper, Typography } from "@material-ui/core";
 import { Category, Explore, LocalOffer } from "@material-ui/icons";
 
@@ -12,7 +13,8 @@ function RenderTags({ tags }) {
           size="small"
           variant="text"
           color="default"
-          // onClick={(e) => tagFilter(e, tag, history)}
+          component={RouterLink}
+          to={`/search/${tag}`}
         >
           {tag}
         </Button>
@@ -30,9 +32,8 @@ const RecipeMetaBar = ({ meal: { strArea, strCategory, strTags } }) => {
           color="default"
           startIcon={<Explore />}
           title="Area"
-          // onClick={(e) => {
-          //   onAreaFilter(e, meal.strArea);
-          // }}
+          component={RouterLink}
+          to={`/area/${strArea}`}
         >
           {strArea}
         </Button>
@@ -40,9 +41,8 @@ const RecipeMetaBar = ({ meal: { strArea, strCategory, strTags } }) => {
           variant="text"
           startIcon={<Category />}
           color="default"
-          // onClick={(e) => {
-          //   categoryFilter(e, false, meal.strCategory);
-          // }}
+          component={RouterLink}
+          to={`/category/${strCategory}`}
         >
           {strCategory}
         </Button>
@@ -51,11 +51,7 @@ const RecipeMetaBar = ({ meal: { strArea, strCategory, strTags } }) => {
             <IconButton aria-label="Icon">
               <LocalOffer />
             </IconButton>
-            <RenderTags
-              tags={strTags}
-              // tagFilter={tagFilter}
-              // history={history}
-            />
+            <RenderTags tags={strTags} />
           </Typography>
         )}
       </Paper>

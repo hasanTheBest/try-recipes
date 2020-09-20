@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // Router
 import { useHistory, Link as RouterLink } from "react-router-dom";
 // Material UI
@@ -22,6 +22,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 // Components
+import { ContextSetting } from "../../Context/ContextSetting";
 import SearchField from "./Nav/SearchField";
 import AreaSelect from "./Nav/AreaSelect";
 import CategoryBar from "./Nav/CategoryBar";
@@ -78,17 +79,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Nav({
-  categoryFilter,
-  handleClickFilterLetter,
-  tabs,
-  handleChangeSwitch,
-}) {
+export default function Navigation() {
   const classes = useStyles();
-  let history = useHistory();
-
+  const { nightMode, setNightMode } = useContext(ContextSetting);
   // STATE
-
   const [openDrawer, setOpenDrawer] = useState(false);
 
   // Drawer Component
@@ -101,6 +95,11 @@ export default function Nav({
       return;
     }
     setOpenDrawer(open);
+  };
+
+  // Theme Switching
+  const handleChangeNightMode = () => {
+    setNightMode(!nightMode);
   };
 
   return (
@@ -135,7 +134,7 @@ export default function Nav({
                   <Box mr={1}>
                     <Button
                       aria-label="Night mode toggle"
-                      onClick={handleChangeSwitch}
+                      onClick={handleChangeNightMode}
                       color="primary"
                       variant="contained"
                     >
@@ -144,9 +143,7 @@ export default function Nav({
                   </Box>
                 </Hidden>
                 <Box mr={2}>
-                  <PopperLetterFilter
-                    handleClickFilterLetter={handleClickFilterLetter}
-                  />
+                  <PopperLetterFilter />
                 </Box>
                 <Hidden smDown>
                   <AreaSelect />
@@ -156,7 +153,7 @@ export default function Nav({
           </Toolbar>
           {/* Category Bar */}
           <Hidden smDown>
-            <CategoryBar categoryFilter={categoryFilter} tabs={tabs} />
+            <CategoryBar />
           </Hidden>
         </AppBar>
       </div>
