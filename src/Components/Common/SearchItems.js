@@ -6,7 +6,7 @@ import SkeletonRecipeItem from "./SkeletonRecipeItem";
 import useSuspenseItems from "../../Hook/useSuspenseItems";
 import useInfinitiveScroll from "../../Hook/useInfinitiveScroll";
 
-const SearchItems = ({ term, filter, id, name }) => {
+const SearchItems = ({ term, filter, id, name = "Meal" }) => {
   const catRecipes = useSuspenseItems(term, filter, id);
   const { items, lastElRef, loading } = useInfinitiveScroll(catRecipes, id);
 

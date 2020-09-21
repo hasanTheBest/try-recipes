@@ -1,16 +1,22 @@
-import React from "react";
+import React, { memo, useContext } from "react";
 import { FormControlLabel, Switch } from "@material-ui/core";
+import { ContextSetting } from "../../../../Context/ContextSetting";
 
 const ThemeModeSwitch = () => {
+  const { nightMode, setNightMode } = useContext(ContextSetting);
+  const handleChangeNightMode = () => {
+    setNightMode(!nightMode);
+  };
+
   return (
     <FormControlLabel
       // onClick={toggleDrawer("left", false)}
       value="dark"
       control={
         <Switch
-          color="primary"
-          // checked={Boolean(Number(nightMode))}
-          // onChange={handleChangeSwitch}
+          color="secondary"
+          checked={nightMode}
+          onChange={handleChangeNightMode}
         />
       }
       label="Theme Dark"
@@ -19,4 +25,4 @@ const ThemeModeSwitch = () => {
   );
 };
 
-export default ThemeModeSwitch;
+export default memo(ThemeModeSwitch);

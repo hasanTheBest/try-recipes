@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import {
@@ -8,15 +8,20 @@ import {
   EmojiNature,
   Home,
 } from "@material-ui/icons";
+import { ContextSetting } from "../../../../Context/ContextSetting";
 
 const ListItemPage = () => {
   const { pathname } = useLocation();
+  const { toggleDrawer } = useContext(ContextSetting);
 
+  const handleClick = () => {
+    toggleDrawer(true);
+  };
+  const handleKeydown = () => {
+    toggleDrawer(false);
+  };
   return (
-    <List
-    // onClick={toggleDrawer("left", false)}
-    // onKeyDown={toggleDrawer("left", false)}
-    >
+    <List onClick={handleClick} onKeyDown={handleKeydown}>
       <ListItem
         button
         to="/"

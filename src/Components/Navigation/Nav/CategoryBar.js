@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Router
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 // Material UI Components
 import { makeStyles, AppBar, Tabs, Tab } from "@material-ui/core";
 import categories from "../../../data/category_list.json";
@@ -15,12 +15,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CategoryBar() {
   const classes = useStyles();
+  const [value, setValue] = useState("");
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname.includes("/category/")) {
+      setValue(pathname.split("/")[pathname.split("/").length - 1]);
+    } else {
+      setValue("");
+    }
+  }, [pathname]);
 
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
-          value="Beef"
+          value={value}
           indicatorColor="secondary"
           textColor="secondary"
           variant="scrollable"

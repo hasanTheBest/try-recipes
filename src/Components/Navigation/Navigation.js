@@ -1,10 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 // Router
-import { useHistory, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 // Material UI
 import {
   Hidden,
-  Button,
   Box,
   AppBar,
   Toolbar,
@@ -14,20 +13,19 @@ import {
 } from "@material-ui/core";
 
 // Material UI Styles
-import { fade, makeStyles } from "@material-ui/core/styles";
-import spacing from "@material-ui/system";
+import { makeStyles } from "@material-ui/core/styles";
 
 // Material Icons
 import MenuIcon from "@material-ui/icons/Menu";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 // Components
-import { ContextSetting } from "../../Context/ContextSetting";
 import SearchField from "./Nav/SearchField";
 import AreaSelect from "./Nav/AreaSelect";
 import CategoryBar from "./Nav/CategoryBar";
 import PopperLetterFilter from "./Nav/PopperLetterFilter";
 import NavDrawer from "./Nav/NavDrawer/NavDrawer";
+import ButtonNightMode from "./Nav/ButtonNightMode";
+import { ContextSetting } from "../../Context/ContextSetting";
 
 const useStyles = makeStyles((theme) => ({
   appTitle: {
@@ -81,26 +79,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navigation() {
   const classes = useStyles();
-  const { nightMode, setNightMode } = useContext(ContextSetting);
-  // STATE
-  const [openDrawer, setOpenDrawer] = useState(false);
-
-  // Drawer Component
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setOpenDrawer(open);
-  };
-
-  // Theme Switching
-  const handleChangeNightMode = () => {
-    setNightMode(!nightMode);
-  };
+  const { toggleDrawer } = useContext(ContextSetting);
+  const handleClick = () => toggleDrawer(true);
 
   return (
     <>
@@ -113,7 +93,7 @@ export default function Navigation() {
                 className={classes.menuButton}
                 color="inherit"
                 aria-label="open drawer"
-                onClick={toggleDrawer("left", true)}
+                onClick={handleClick}
               >
                 <MenuIcon />
               </IconButton>
@@ -131,16 +111,7 @@ export default function Navigation() {
             <Hidden only="xs">
               <div className={classes.filterWrapper}>
                 <Hidden smDown>
-                  <Box mr={1}>
-                    <Button
-                      aria-label="Night mode toggle"
-                      onClick={handleChangeNightMode}
-                      color="primary"
-                      variant="contained"
-                    >
-                      {<Brightness4Icon />}
-                    </Button>
-                  </Box>
+                  <ButtonNightMode />
                 </Hidden>
                 <Box mr={2}>
                   <PopperLetterFilter />
@@ -157,7 +128,7 @@ export default function Navigation() {
           </Hidden>
         </AppBar>
       </div>
-      <NavDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
+      <NavDrawer />
     </>
   );
 }

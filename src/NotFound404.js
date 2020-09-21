@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { makeStyles, Box, Typography, Button, Paper } from "@material-ui/core";
-import spacing from "@material-ui/system";
+import { makeStyles, Box, Typography, Button } from "@material-ui/core";
 import { Home } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 
 const styles = makeStyles((theme) => ({
   alert: {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import {
   Box,
@@ -11,8 +11,6 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-// Data
-import singleRecipe from "../../data/single_recipe.json";
 // Components
 import IngredientMeasureTable from "../Home/RecipeLookup/IngredientMeasureTable";
 import RecipeIngredientList from "../Home/RecipeLookup/RecipeIngredientList";

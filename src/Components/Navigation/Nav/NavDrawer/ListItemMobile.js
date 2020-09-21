@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Collapse,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  TextField,
-} from "@material-ui/core";
+import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import {
   Category,
   EditLocation,
@@ -16,11 +8,8 @@ import {
   ExpandMore,
 } from "@material-ui/icons";
 
-import { Autocomplete } from "@material-ui/lab";
-import parse from "autosuggest-highlight/parse";
-import match from "autosuggest-highlight/match";
-
 // Components
+import CollapseAutocomplete from "./ListItemMobileCollapse/CollapseAutocomplete";
 import ListItemMobileCollapse from "./ListItemMobileCollapse/ListItemMobileCollapse";
 import categoryList from "../../../../data/category_list.json";
 import areaList from "../../../../data/area_list.json";
@@ -85,45 +74,10 @@ const ListItemMobile = () => {
         <ListItemText primary="Ingredients" />
         {openIngredients ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={openIngredients} timeout="auto" unmountOnExit>
-        <Box p={1}>
-          <Autocomplete
-            autoComplete
-            id="highlights-ingredient"
-            options={ingredients.meals}
-            getOptionLabel={({ strIngredient }) => strIngredient}
-            size="small"
-            // onChange={handleAutocompleteChange}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Search Ingredient"
-                variant="filled" // outlined
-                margin="normal"
-              />
-            )}
-            renderOption={({ strIngredient }, { inputValue }) => {
-              const matches = match(strIngredient, inputValue);
-              const parts = parse(strIngredient, matches);
-
-              return (
-                <div>
-                  {parts.map((part, index) => (
-                    <span
-                      key={index}
-                      style={{
-                        fontWeight: part.highlight ? 700 : 400,
-                      }}
-                    >
-                      {part.text}
-                    </span>
-                  ))}
-                </div>
-              );
-            }}
-          />
-        </Box>
-      </Collapse>
+      <CollapseAutocomplete
+        open={openIngredients}
+        options={ingredients.meals}
+      />
     </List>
   );
 };

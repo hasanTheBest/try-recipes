@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 // Material UI
 import {
   SwipeableDrawer,
@@ -11,6 +11,7 @@ import {
 import ListItemPage from "./ListItemPage";
 import ThemeModeSwitch from "./ThemeModeSwitch";
 import ListItemMobile from "./ListItemMobile";
+import { ContextSetting } from "../../../../Context/ContextSetting";
 
 // STYLES
 const styles = makeStyles((theme) => ({
@@ -19,18 +20,20 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavDrawer({ toggleDrawer, open }) {
+export default function NavDrawer() {
   const classes = styles();
-
+  const { openDrawer, toggleDrawer } = useContext(ContextSetting);
+  const handleClose = () => toggleDrawer(false);
+  const handleOpen = () => toggleDrawer(true);
   return (
     <>
       {/* DRAWER LEFT */}
       <div className={classes.drawer}>
         <SwipeableDrawer
           anchor="left"
-          open={open}
-          onClose={toggleDrawer("left", false)}
-          onOpen={toggleDrawer("left", false)}
+          open={openDrawer}
+          onClose={handleClose}
+          onOpen={handleOpen}
         >
           <div className={classes.drawerList} role="presentation">
             {/* Visible only 600px and down */}

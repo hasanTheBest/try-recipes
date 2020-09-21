@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { createContext } from "react";
 import useLocalStorageState from "../Hook/useLocalStorageState";
 
@@ -17,8 +17,25 @@ const SettingProvider = ({ children }) => {
     },
   });
 
+  // STATE
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  // Drawer Component
+  const toggleDrawer = (open, anchor = "left") => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpenDrawer(open);
+  };
+
   return (
-    <ContextSetting.Provider value={{ nightMode, setNightMode, theme }}>
+    <ContextSetting.Provider
+      value={{ nightMode, setNightMode, theme, openDrawer, toggleDrawer }}
+    >
       {children}
     </ContextSetting.Provider>
   );

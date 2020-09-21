@@ -10,7 +10,7 @@ import Navigation from "./Components/Navigation/Navigation";
 import Home from "./Containers/Home";
 import About from "./Containers/About";
 import NotFound404 from "./NotFound404";
-import SkeletonRecipeItem from "./Components/Common/SkeletonRecipeItem";
+import CircularBackdrop from "./Components/Common/CircularBackdrop";
 
 const RecipeLookup = lazy(() => import("./Components/Common/RecipeLookup"));
 const Categories = lazy(() => import("./Containers/Categories"));
@@ -39,49 +39,49 @@ export default function App() {
             </Route>
 
             <Route path="/recipe/:id" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <RecipeLookup />
               </Suspense>
             </Route>
 
             <Route path="/categories" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <Categories />
               </Suspense>
             </Route>
 
             <Route path="/category/:id" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <Category />
               </Suspense>
             </Route>
 
             <Route path="/ingredients" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <Ingredients />
               </Suspense>
             </Route>
 
             <Route path="/ingredient/:id" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <Ingredient />
               </Suspense>
             </Route>
 
             <Route path="/area/:id" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <Area />
               </Suspense>
             </Route>
 
             <Route path="/first_letter/:id" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <FirstLetter />
               </Suspense>
             </Route>
 
             <Route path="/search/:id" exact>
-              <Suspense fallback={<SkeletonRecipeItem />}>
+              <Suspense fallback={<CircularBackdrop />}>
                 <SearchRecipe />
               </Suspense>
             </Route>

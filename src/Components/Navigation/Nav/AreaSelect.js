@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React, { memo, useState } from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   Button,
   InputLabel,
@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
 const AreaSelect = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
+  const [territory, setTerritory] = useState("");
+  const { pathname } = useLocation();
   // Select Component
   const handleCloseSelect = () => {
     setOpen(false);
@@ -38,6 +39,10 @@ const AreaSelect = () => {
   const handleOpenSelect = () => {
     setOpen(true);
   };
+  const handleChangeSelect = (e) => {
+    setTerritory(e.target.value);
+  };
+
   return (
     <>
       <Button
@@ -53,16 +58,21 @@ const AreaSelect = () => {
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
+          value={territory}
           open={open}
           onClose={handleCloseSelect}
           onOpen={handleOpenSelect}
-          value=""
+          onChange={handleChangeSelect}
         >
           <MenuItem value="">
             <em>Area</em>
           </MenuItem>
           {areas.meals.map(({ strArea }, i) => (
-            <MenuItem key={String(i)} value={strArea}>
+            <MenuItem
+              key={String(i)}
+              value={strArea}
+              selected={pathname === `/area/${strArea}`}
+            >
               <Link
                 to={`/area/${strArea}`}
                 component={RouterLink}
@@ -78,4 +88,4 @@ const AreaSelect = () => {
   );
 };
 
-export default AreaSelect;
+export default memo(AreaSelect);

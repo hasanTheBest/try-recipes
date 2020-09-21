@@ -1,5 +1,5 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { LabelOutlined } from "@material-ui/icons";
 import {
   Collapse,
@@ -9,6 +9,7 @@ import {
   ListItemText,
   makeStyles,
 } from "@material-ui/core";
+import { ContextSetting } from "../../../../../Context/ContextSetting";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -19,20 +20,20 @@ const useStyles = makeStyles((theme) => ({
 const ListItemMobileCollapse = ({ open, items, itemName }) => {
   const { pathname } = useLocation();
   const classes = useStyles();
+  const { toggleDrawer } = useContext(ContextSetting);
+
+  const handleClick = () => toggleDrawer(false);
   return (
     <Collapse in={open} timeout="auto" unmountOnExit>
-      <List
-        component="div"
-        disablePadding
-        // onClick={toggleDrawer("left", false)}
-      >
+      <List component="div" disablePadding onClick={handleClick}>
         {items.map((item) => {
           return (
             <ListItem
               button
               className={classes.nested}
+              to={`/${itemName}/${Object.values(item)[0]}`}
+              component={RouterLink}
               selected={`/${itemName}/${Object.values(item)[0]}` === pathname}
-              // onClick={(e) => categoryFilter("", strCategory, history)}
             >
               <ListItemIcon>
                 <LabelOutlined />

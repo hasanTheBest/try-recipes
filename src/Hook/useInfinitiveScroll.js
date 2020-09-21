@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
 const useInfinitiveScroll = (data, query = "recipe") => {
-  const itemCount = 8;
+  const itemCount = 12;
   const [loading, setLoading] = useState(true);
   const [part, setPart] = useState(1);
   const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems([]);
+  }, [query]);
 
   useEffect(() => {
     setLoading(true);
