@@ -1,13 +1,19 @@
 import React, { createContext } from "react";
-import data from "../data/recipes.json";
+import useFetch from "../Hook/useFetch";
+import useLocalStorageState from "../Hook/useLocalStorageState";
 
 export const ContextRecipe = createContext();
 
 const RecipeProvider = ({ children }) => {
-  const recipes = data.meals;
+  const cats = useFetch("list", "c", "list").then((data) => data.data);
+
+  const [categoryList] = useLocalStorageState(
+    "try-recipe:category_list",
+    cats.meals
+  );
 
   return (
-    <ContextRecipe.Provider value={{ recipes }}>
+    <ContextRecipe.Provider value={{ categoryList }}>
       {children}
     </ContextRecipe.Provider>
   );

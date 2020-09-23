@@ -15,13 +15,10 @@ const ListItemPage = () => {
   const { toggleDrawer } = useContext(ContextSetting);
 
   const handleClick = () => {
-    toggleDrawer(true);
-  };
-  const handleKeydown = () => {
     toggleDrawer(false);
   };
   return (
-    <List onClick={handleClick} onKeyDown={handleKeydown}>
+    <List onClick={handleClick}>
       <ListItem
         button
         to="/"

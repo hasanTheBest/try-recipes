@@ -22,8 +22,6 @@ const ListItemMobile = () => {
   const [openIngredients, setOpenIngredients] = useState(false);
 
   const handleMenuItemClick = (name) => {
-    // Keep open drawer
-    // setOpenDrawer(false);
     switch (name) {
       case "categories":
         setOpenCategories(!openCategories);

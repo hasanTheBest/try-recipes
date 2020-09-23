@@ -3,7 +3,7 @@ import produce from "immer";
 import LRU from "lru-cache";
 import md5 from "md5";
 
-const cache = new LRU(500);
+const cache = new LRU(600);
 
 const useSuspenseItems = (term, filter, id) => {
   const key = md5(JSON.stringify(`${term}?${filter}=${id}`));

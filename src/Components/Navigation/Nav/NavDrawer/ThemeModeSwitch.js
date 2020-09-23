@@ -3,9 +3,10 @@ import { FormControlLabel, Switch } from "@material-ui/core";
 import { ContextSetting } from "../../../../Context/ContextSetting";
 
 const ThemeModeSwitch = () => {
-  const { nightMode, setNightMode } = useContext(ContextSetting);
+  const { nightMode, setNightMode, toggleDrawer } = useContext(ContextSetting);
   const handleChangeNightMode = () => {
     setNightMode(!nightMode);
+    toggleDrawer(false);
   };
 
   return (

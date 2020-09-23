@@ -24,6 +24,7 @@ import AreaSelect from "./Nav/AreaSelect";
 import CategoryBar from "./Nav/CategoryBar";
 import PopperLetterFilter from "./Nav/PopperLetterFilter";
 import NavDrawer from "./Nav/NavDrawer/NavDrawer";
+import HideOnScroll from "./HideOnScroll";
 import ButtonNightMode from "./Nav/ButtonNightMode";
 import { ContextSetting } from "../../Context/ContextSetting";
 
@@ -85,48 +86,50 @@ export default function Navigation() {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar className={classes.toolbar}>
-            <div className={classes.titleWrapper}>
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleClick}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography className={classes.title} variant="h6" noWrap>
-                <Link
-                  to="/"
-                  component={RouterLink}
-                  className={classes.appTitle}
+        <HideOnScroll>
+          <AppBar position="static">
+            <Toolbar className={classes.toolbar}>
+              <div className={classes.titleWrapper}>
+                <IconButton
+                  edge="start"
+                  className={classes.menuButton}
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleClick}
                 >
-                  Recipes
-                </Link>
-              </Typography>
-            </div>
-            <SearchField />
-            <Hidden only="xs">
-              <div className={classes.filterWrapper}>
-                <Hidden smDown>
-                  <ButtonNightMode />
-                </Hidden>
-                <Box mr={2}>
-                  <PopperLetterFilter />
-                </Box>
-                <Hidden smDown>
-                  <AreaSelect />
-                </Hidden>
+                  <MenuIcon />
+                </IconButton>
+                <Typography className={classes.title} variant="h6" noWrap>
+                  <Link
+                    to="/"
+                    component={RouterLink}
+                    className={classes.appTitle}
+                  >
+                    Recipes
+                  </Link>
+                </Typography>
               </div>
+              <SearchField />
+              <Hidden only="xs">
+                <div className={classes.filterWrapper}>
+                  <Hidden smDown>
+                    <ButtonNightMode />
+                  </Hidden>
+                  <Box mr={2}>
+                    <PopperLetterFilter />
+                  </Box>
+                  <Hidden smDown>
+                    <AreaSelect />
+                  </Hidden>
+                </div>
+              </Hidden>
+            </Toolbar>
+            {/* Category Bar */}
+            <Hidden smDown>
+              <CategoryBar />
             </Hidden>
-          </Toolbar>
-          {/* Category Bar */}
-          <Hidden smDown>
-            <CategoryBar />
-          </Hidden>
-        </AppBar>
+          </AppBar>
+        </HideOnScroll>
       </div>
       <NavDrawer />
     </>
