@@ -2,7 +2,7 @@
 
 Hey Foodie! Explore recipes and try them out with the help of text and video instructions.
 
-live link https://try-recipe.netlify.app/
+live link https://try-recipes.netlify.app/
 
 ## Features
 
@@ -19,4 +19,4 @@ live link https://try-recipe.netlify.app/
 3. React Router - A declarative routing for react.js
 4. API - themealdb.com
 5. Helper - material-ui-popup-state, material-ui-image, autosuggest-highlight
-6. Custom Hook, Suspense, Lazy Load and Context Api
+6. Custom Hook, Suspense, Lazy Load and Context Api from ReactJs
